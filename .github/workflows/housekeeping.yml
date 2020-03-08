@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Create/update the short tag to match the release tag
+    - name: Create/update a short tag to match the release tag
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         _repo: ${{ github.repository }}
