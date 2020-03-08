@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Update the short tag to match the release tag
+    - name: Create/update the short tag to match the release tag
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         _repo: ${{ github.repository }}
@@ -30,4 +30,5 @@ jobs:
         _a="Authorization: token ${GITHUB_TOKEN}"
         _b="{\"sha\": \"${_tag_sha}\"}"
         _c="${_api}/repos/${_repo}/git/refs/tags/${_tag_name%%.*}"
+        curl -sL -XPOST -H "${_a}" -d "${_b}" "${_c}"
         curl -sL -XPATCH -H "${_a}" -d "${_b}" "${_c}"
