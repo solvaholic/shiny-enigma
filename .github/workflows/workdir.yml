@@ -1,0 +1,21 @@
+name: Docker
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - .github/workflows/workdir.yml
+
+jobs:
+  with:
+    runs-on: ubuntu-latest
+    steps:
+      - name: What's GITHUB_WORKSPACE in a container with WORKDIR set?
+        run: docker run --rm --entrypoint /bin/bash -w -w /usr/local/var debian:9 -c "pwd; echo \$GITHUB_WORKSPACE"
+
+  without:
+    runs-on: ubuntu-latest
+    steps:
+      - name: What's GITHUB_WORKSPACE in a container without WORKDIR?
+        run: docker run --rm --entrypoint /bin/bash debian:9 -c "pwd; echo \$GITHUB_WORKSPACE"
